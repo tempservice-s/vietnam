@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Set up CentOS 8
         run: |
-          sudo docker run -d --name centos8-vps --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro centos:8 /sbin/init
+          sudo docker run -d --name centos8-vps --privileged centos:8 sleep infinity
           sleep 10
-          sudo docker exec -it centos8-vps bash -c "
+          sudo docker exec centos8-vps bash -c "
             dnf install -y epel-release
             dnf install -y xrdp
             systemctl enable xrdp
@@ -30,7 +30,7 @@ jobs:
 
       - name: Create RDP User
         run: |
-          sudo docker exec -it centos8-vps bash -c "
+          sudo docker exec centos8-vps bash -c "
             useradd -m -s /bin/bash rdpuser
             echo 'rdpuser:Datnguyentv.com' | chpasswd
           "
